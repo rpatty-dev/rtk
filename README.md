@@ -87,3 +87,7 @@ https://nitech-1izpygdbd-rpattys-projects.vercel.app
 100.112.33.47  ryans-macbook-pro  rpatty-dev@  macOS    -                       
 100.71.60.14   ryan-work-pc       rpatty-dev@  windows  idle; offers exit node  
 ```
+
+---
+
+Built with help from [Nitech](https://nitech.dev).
