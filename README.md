@@ -11,34 +11,36 @@ This fork extends upstream [`rtk-ai/rtk`](https://github.com/rtk-ai/rtk) with na
 ---
 
 > [!IMPORTANT]
-> ### ⚡ Agent One-Shot Installation Prompts (Cross-Platform: macOS, Linux, Windows)
+> ### ⚡ Agent One-Shot Prompts
 >
-> Paste the prompt directly into your AI coding assistant (Claude Code, Gemini CLI, Cursor, Antigravity, OpenCode):
+> Paste either prompt below into your AI coding assistant (Claude Code, Gemini CLI, Cursor, Antigravity, OpenCode). The agent will detect your operating system and configure the token optimizers automatically:
 >
-> #### Option A: If you already have `rtk` installed (Add All Fork Optimizers)
+> #### Prompt A: If you already have `rtk` installed
+> ```text
+> Please install the custom RTK optimizers from rpatty-dev's fork (covering Vercel, Firebase, Tailscale, and system diagnostics) to lower our context token usage.
 >
-> **macOS / Linux / WSL (Bash/Zsh):**
-> ```bash
-> python3 -c 'import urllib.request, os, pathlib; base="https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/"; d = pathlib.Path(os.path.expanduser("~/Library/Application Support/rtk" if os.uname().sysname=="Darwin" else "~/.config/rtk")); d.mkdir(parents=True, exist_ok=True); fpath = d / "filters.toml"; content = "schema_version = 1\n\n"; [content := content + urllib.request.urlopen(base + name).read().decode() + "\n\n" for name in ["vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml"]]; fpath.write_text(content); os.system("rtk trust --yes")' && echo "✓ Fork optimizers active for RTK"
-> ```
+> Check my OS and run the appropriate command:
+> - On macOS/Linux/WSL, run:
+>   python3 -c 'import urllib.request, os, pathlib; base="https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/"; d = pathlib.Path(os.path.expanduser("~/Library/Application Support/rtk" if os.uname().sysname=="Darwin" else "~/.config/rtk")); d.mkdir(parents=True, exist_ok=True); fpath = d / "filters.toml"; content = "schema_version = 1\n\n"; [content := content + urllib.request.urlopen(base + name).read().decode() + "\n\n" for name in ["vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml"]]; fpath.write_text(content); os.system("rtk trust --yes")'
+> - On Windows PowerShell, run:
+>   $d = "$env:APPDATA\rtk"; if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }; $c = "schema_version = 1`n`n"; @("vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml") | ForEach-Object { $c += (Invoke-RestMethod "https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/$_") + "`n`n" }; Set-Content -Path "$d\filters.toml" -Value $c; rtk trust --yes
 >
-> **Windows (PowerShell 5.1 / 7+):**
-> ```powershell
-> $d = "$env:APPDATA\rtk"; if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }; $c = "schema_version = 1`n`n"; @("vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml") | ForEach-Object { $c += (Invoke-RestMethod "https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/$_") + "`n`n" }; Set-Content -Path "$d\filters.toml" -Value $c; rtk trust --yes; Write-Host "✓ Fork optimizers active for RTK"
+> Verify the filters are trusted with `rtk trust` and confirm when finished.
 > ```
 >
 > ---
 >
-> #### Option B: If you do NOT have `rtk` installed (Fresh Full Install + All Fork Optimizers)
+> #### Prompt B: If you do NOT have `rtk` installed yet
+> ```text
+> Please install RTK (Rust Token Killer) along with rpatty-dev's custom cloud & CLI optimizers (Vercel, Firebase, Tailscale, system diagnostics) so we can cut our command output token usage by up to 61%.
 >
-> **macOS / Linux / WSL (Bash/Zsh):**
-> ```bash
-> curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh && python3 -c 'import urllib.request, os, pathlib; base="https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/"; d = pathlib.Path(os.path.expanduser("~/Library/Application Support/rtk" if os.uname().sysname=="Darwin" else "~/.config/rtk")); d.mkdir(parents=True, exist_ok=True); fpath = d / "filters.toml"; content = "schema_version = 1\n\n"; [content := content + urllib.request.urlopen(base + name).read().decode() + "\n\n" for name in ["vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml"]]; fpath.write_text(content); os.system("rtk trust --yes")' && echo "✓ RTK + all fork optimizers fully installed"
-> ```
+> Check my OS and execute:
+> - On macOS/Linux/WSL, run:
+>   curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh && python3 -c 'import urllib.request, os, pathlib; base="https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/"; d = pathlib.Path(os.path.expanduser("~/Library/Application Support/rtk" if os.uname().sysname=="Darwin" else "~/.config/rtk")); d.mkdir(parents=True, exist_ok=True); fpath = d / "filters.toml"; content = "schema_version = 1\n\n"; [content := content + urllib.request.urlopen(base + name).read().decode() + "\n\n" for name in ["vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml"]]; fpath.write_text(content); os.system("rtk trust --yes")'
+> - On Windows PowerShell, run:
+>   winget install rtk-ai.rtk; $d = "$env:APPDATA\rtk"; if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }; $c = "schema_version = 1`n`n"; @("vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml") | ForEach-Object { $c += (Invoke-RestMethod "https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/$_") + "`n`n" }; Set-Content -Path "$d\filters.toml" -Value $c; rtk trust --yes
 >
-> **Windows (PowerShell 5.1 / 7+):**
-> ```powershell
-> winget install rtk-ai.rtk; $d = "$env:APPDATA\rtk"; if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }; $c = "schema_version = 1`n`n"; @("vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml") | ForEach-Object { $c += (Invoke-RestMethod "https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/$_") + "`n`n" }; Set-Content -Path "$d\filters.toml" -Value $c; rtk trust --yes; Write-Host "✓ RTK + all fork optimizers fully installed"
+> Verify `rtk --version` works and confirm when all optimizers are active.
 > ```
 
 ---
