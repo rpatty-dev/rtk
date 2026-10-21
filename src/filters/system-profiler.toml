@@ -1,18 +1,18 @@
 [filters.system-profiler]
 description = "Compact macOS system_profiler diagnostics output"
-match_command = "^system_profiler\\b"
+match_command = '^system_profiler\b'
 strip_ansi = true
 strip_lines_matching = [
-  "^\\s*$",
-  "^\\s*Bus:",
-  "^\\s*Type: GPU",
-  "^\\s*Vendor:",
-  "^\\s*Metal Support:",
-  "^\\s*Display Type:",
-  "^\\s*Mirror:",
-  "^\\s*Online:",
-  "^\\s*Automatically Adjust Brightness:",
-  "^\\s*Connection Type:"
+  '^\s*$',
+  '^\s*Bus:',
+  '^\s*Type: GPU',
+  '^\s*Vendor:',
+  '^\s*Metal Support:',
+  '^\s*Display Type:',
+  '^\s*Mirror:',
+  '^\s*Online:',
+  '^\s*Automatically Adjust Brightness:',
+  '^\s*Connection Type:'
 ]
 truncate_lines_at = 140
 max_lines = 20
