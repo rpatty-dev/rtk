@@ -26,6 +26,7 @@ This fork extends upstream [`rtk-ai/rtk`](https://github.com/rtk-ai/rtk) with na
 >   $d = "$env:APPDATA\rtk"; if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }; $c = "schema_version = 1`n`n"; @("vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml") | ForEach-Object { $c += (Invoke-RestMethod "https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/$_") + "`n`n" }; Set-Content -Path "$d\filters.toml" -Value $c; rtk trust --yes
 >
 > Verify the filters are trusted with `rtk trust` and confirm when finished.
+> Now globally, if you are ever using firebase, vercel, tailscale, or macos system commands, use the RTK command for it globally so it works on every chat.
 > ```
 >
 > ---
@@ -41,6 +42,7 @@ This fork extends upstream [`rtk-ai/rtk`](https://github.com/rtk-ai/rtk) with na
 >   winget install rtk-ai.rtk; $d = "$env:APPDATA\rtk"; if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }; $c = "schema_version = 1`n`n"; @("vercel.toml","firebase.toml","tailscale.toml","system-profiler.toml") | ForEach-Object { $c += (Invoke-RestMethod "https://raw.githubusercontent.com/rpatty-dev/rtk/develop/src/filters/$_") + "`n`n" }; Set-Content -Path "$d\filters.toml" -Value $c; rtk trust --yes
 >
 > Verify `rtk --version` works and confirm when all optimizers are active.
+> Now globally, if you are ever using firebase, vercel, tailscale, or macos system commands, use the RTK command for it globally so it works on every chat.
 > ```
 
 ---
